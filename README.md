@@ -101,5 +101,43 @@ The main issues identified include:
 
 The data was cleaned and standardized before being loaded into the final analytical tables.
 
+## Database Design
+
+The cleaned data was organized into two PostgreSQL schemas:
+
+### Booking Schema
+
+The 'booking' schema contains information related to customers, drivers, and trips.
+
+| Table | Purpose |
+|---|---|
+| 'booking.customers' | Stores unique customer information |
+| 'booking.drivers' | Stores unique driver inormation |
+| 'booking.trips' | Stores individual trip transaction |
+
+### Fleet Schema
+
+The 'fleet' schema contains vehicle and fleet operating information.
+
+| Table | Purpose |
+|---|---|
+| 'fleet.vehicles' | Canonical vehicle master table |
+| 'fleet.fuel_logs' | Records vehicle fuel events and costs |
+| 'fleet.maintenance_logs' | Records vehicle maintenance events and costs |
+
+### Entity Relationships
+
+The database uses primary and foreign keys to connect the entities.
+- Each trip references a customer.
+- Each trip references a driver.
+- Each trip references a vehicle.
+- Each fuel log references a vehicle.
+- Each maintenance log references a vehicle.
+- The 'fleet.vehicles' table acts as the single source of the truth for vehicle information.
+
+Vehicle details were not duplicated across the clean tables. Instead, the 'vehicle_id' generated in 'fleet.vehicles' was used as the relationship key.
+
+
+
 
 

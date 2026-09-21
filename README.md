@@ -81,4 +81,25 @@ The 'vehicle plate' field was used as the natural reconciliation key between the
 
 Because vehicle plate values contained inconsistent formatting, casing, and whitespace, they were normalized before matching vehicles across the two datasets.
 
+## Data Quality Issues Identified
+
+Before creating the clean database, the raw datasets were profiled to identify data quality problems.
+
+The main issues identified include:
+
+| Issues | Examples |
+|---|---|
+| Inconsistent casing | Names, status, payment method, vehicle makes/models |
+| Whitespace | Names, vehicle plate, station names |
+| Phone formats | Different phone number formats and missing values |
+| Date formats | Multiple date formats in the same column |
+| Currency values | Currency symbols and comma-formatted numbers |
+| Invalid values | Rating outside the 1-5 range and negative distances |
+| Missing values | Blank values across different fields |
+| Duplicate records | Exact duplicate rows |
+| Vehicle identifiers | Different formatting/spelling of the same plate |
+
+The data was cleaned and standardized before being loaded into the final analytical tables.
+
+
 

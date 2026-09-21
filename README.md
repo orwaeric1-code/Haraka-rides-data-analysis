@@ -8,8 +8,77 @@ Haraka Rides is a ride-hailing company with data coming from two separate operat
 
 The booking data contains information about customers, drivers, vehicles, trips, payment amounts, and ratings, while the fleet data contains vehicle, fuel, and maintenance information.
 
-The purpose of this project was to transform raw and inconsistent data into a clean, structured PostgreSQL database and use SQL to analyse trip performance, fleet operating costs, revenue, and vehicle profitability.
+The purpose of this project was to transform raw, inconsistent data into a clean, structured PostgreSQL database and use SQL to analyse trip performance, fleet operating costs, revenue, and vehicle profitability.
 
 The fuel analysis connects booking and fleet data to answer the key business question for this project.
 
 > Which vehicles are actually making the company money?
+
+## Project Objectives
+
+The main objectives of this project were to:
+
+- Load the raw booking and fleet data into PostgreSQL staging tables.
+- Profile the raw data and identify data-quality issues.
+- Clean and standardize inconsistent values.
+- Design a normalized relational database using booking and fleet schemas.
+- Create relationships between customers, drivers, trips, vehicles, fuel logs, and maintenance   logs.
+- Use SQL JOINS, aggregations, CTEs, Subqueries, and window functions to answer business questions.
+- Analyse revenue, fuel costs, maintenance costs, and vehicle profitability.
+- Provide data-driven findings that can support fleet management decisions.
+
+## Dataset
+
+The project uses two raw CSV datasets representing two separate operational systems within Haraka Rides.
+
+### 1. Trips Dataset - 'trips_staging.csv'
+
+- Rows: 406
+- Columns: 18
+- Purpose: Contains booking and trip-level information.
+
+Key fields include:
+
+- Trip ID
+- Customer name and phone
+- Customer area
+- Driver name and phone
+- Vehicle plate, make, and model
+- Pickup and drop-off areas
+- Trip date and pickup time
+- Distance travelled
+- Payment method
+- Trip status
+- Fare amount
+- Customer rating
+
+### 2. Fleet Dataset - 'fleet_staging.csv'
+
+- Rows: 106
+- Columns: 17
+- Purpose: Contains vehicle fuel and maintenance events.
+
+Key fields include:
+
+- Log ID
+- Vehicle plate, make, model, and year
+- Vehicle type and status
+- Event type
+- Event date
+- Fuel quantity and cost
+- Odometer reading
+- Station name
+- Service type
+- Maintenance cost
+- Mechanic name
+- Next service due
+
+### Data Relationship
+
+The two datasets contain vehicle information independently.
+
+The 'vehicle plate' field was used as the natural reconciliation key between the raw datasets.
+
+Because vehicle plate values contained inconsistent formatting, casing, and whitespace, they were normalized before matching vehicles across the two datasets.
+
+

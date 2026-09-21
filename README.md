@@ -137,6 +137,16 @@ The database uses primary and foreign keys to connect the entities.
 
 Vehicle details were not duplicated across the clean tables. Instead, the 'vehicle_id' generated in 'fleet.vehicles' was used as the relationship key.
 
+## Database Structure
+
+The database consists of two PostgreSQL schemas: 'booking' and 'fleet'.
+
+The 'booking' schema manages customers, drivers, and trips, while the 'fleet' schema manages vehicles, fuel logs and maintenance logs.
+
+The 'fleet.vehicles' table serves as the canonical vehicle table, with trips, fuel logs, and maintenance logs referencing it through 'vehicle_id'.
+
+![Haraka Rides Database Schema](images/haraka_ride_schema.png)
+
 
 
 

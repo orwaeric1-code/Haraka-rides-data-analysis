@@ -1,9 +1,14 @@
 </> SQL
--- creating staging schemas
-
+-- ===============================================================================
+-- HARAKA RIDES PROJECT
+-- 01 - STAGING
+-- Purpose: Create raw staging tables
+-- ===============================================================================
+  
 create schema if not exists staging;
-
--- Trips staging table
+----------------------------------------------------------------------------------
+-- Trips Staging Table
+----------------------------------------------------------------------------------
 create table staging.trip_staging(
 trip_id TEXT,
 customer_name TEXT,
@@ -24,8 +29,9 @@ status TEXT,
 fare_amount TEXT,
 customer_rating TEXT
 );
-
+-----------------------------------------------------------------------------------
 -- Fleet staging table
+-----------------------------------------------------------------------------------
 create table staging.fleet_staging(
 log_id TEXT,
 vehicle_plate TEXT,
@@ -45,3 +51,4 @@ maintenance_cost TEXT,
 mechanic_name TEXT,
 next_service_due TEXT
 );
+------------------------------------------------------------------------------------

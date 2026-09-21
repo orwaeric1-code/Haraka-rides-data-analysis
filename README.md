@@ -147,6 +147,71 @@ The 'fleet.vehicles' table serves as the canonical vehicle table, with trips, fu
 
 ![Haraka Rides Database Schema](images/haraka_ride_schema.png)
 
+## Data Cleaning & Transformation
+
+The raw datasets were first loaded into staging tables as TEXT, ensuring the original data could be preserved without immediate type conversion.
+
+The following cleaning and transformation steps were applied before loading the data into the final analytical tables.
+
+### 1. Vehicle Plate Normalization
+
+Vehicle plate numbers were standardized by:
+
+- Removing leading and trailing whitespace
+- Removing non-alphanumeric characters
+- Converting values to uppercase
+
+This allowed the same vehicle to be matched consistently across the booking and fleet datasets.
+
+### 2. Name Standardization
+
+Customer, driver, vehicle make, model, and other text fields were trimmed and standardized for consistent capitalization.
+
+### 3. Phone Number Cleaning
+
+Phone numbers were cleaned by removing unnecessary characters while preserving the value as text.
+
+### 4. Date Conversion
+
+Date fields containing different formats were identified and converted into PostgreSQL 'DATE' values using format - specific conversion logic.
+
+### 5. Numeric and Currency Cleaning
+
+Fields such as fare amount, fuel cost, and maintenance cost were stored as numeric values after removing currency symbols, commas, whitespace, and other non-numeric characters.
+
+### 6. Rating Validation
+
+Customer ratings were validated against the expected 1 - 5 range. Invalid or non-numeric ratings were converted to 'NULL' rather than being used as a valid rating.
+
+### 7. Distance Validation
+
+Distance values were converted to numeric values. Invalid and negative distances were treated as 'NULL' rather than being converted into positive values.
+
+### 8. Customer and Driver Deduplication
+
+Customers and drivers were extracted from repeated trip records and consolidated into separate tables.
+
+Where the same person appeared multiple times with missing information in some records, available information was retained where appropriate.
+
+### 9. Fleet Event Separation
+
+The original fleet event date contained both fuel and maintenance records. These were separated into:
+
+- 'fleet.fuel_logs'
+- 'fleet.maintenance_logs'
+
+based on the 'event_type' field.
+
+### 10. Duplicate Handling
+
+Exact duplicate records were removed during migration into the clean analytical tables while preserving the original staging data.
+
+
+
+
+
+
+
 
 
 

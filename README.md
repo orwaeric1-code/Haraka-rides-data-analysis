@@ -206,6 +206,126 @@ based on the 'event_type' field.
 
 Exact duplicate records were removed during migration into the clean analytical tables while preserving the original staging data.
 
+## SQL Analysis & Business Questions
+
+After cleaning and loading the data into the relational database, SQL was used to answer business questions across the booking, fleet, and cross-schema data.
+
+### Booking Analysis
+
+| ID | Business Question | SQL Technique |
+|---|---|---|
+| B1 | Which 5 drivers completed the most trips? | JOIN, GROUP BY, COUNT, ORDER BY, LIMIT |
+| B2 | Which customers have never completed a trip? | LEFT JOIN, NULL filtering |
+| B3 | What is the total revenue by payment method? | WHERE, GROUP BY SUM |
+
+### Fleet Analysis
+
+| ID | Business Question | SQL Technique |
+|---|---|---|
+| F1 | Which vehicles have the highest total fuel cost? | JOIN, GROUP BY, SUM, ORDER BY |
+| F2 | Which vehicles have more than 3 maintenance events? | GROUP BY, COUNT, HAVING |
+| F3 | Which vehicles have never had a fuel log? | LEFT JOIN, NULL filtering |
+
+### Cross-Schema Analysis
+
+| ID | Business Question | SQL Technique |
+|---|---|---|
+| X1 | Which vehicles were used for completed trips? | Cross-schema JOIN |
+| X2 | How much revenue from completed trips did each vehicle generate? | LEFT JOIN, SUM, COALESCE |
+| X3 | How many vehicles under Repair have trips? | Cross-schema JOIN, filtering |
+
+### Subquery Analysis
+
+| ID | Business Question | SQL Technique |
+|---|---|---|
+| S1 | Which trips are longer than the average trip distance? | Subquery, AVG |
+| S2 | Which vehicles spend more on fuel than the average vehicle? | Nested aggregation, subquery |
+| S3 | Which completed trips have fares above the average for their payment method? | Correlated subquery |
+
+## Vehicle Profitability Analysis
+
+The final analysis combined booking and fleet data to calculate the profitability of every vehicle.
+
+### Profitability Formula
+
+Net Profit was cleaned as:
+
+**Net Profit = Completed Trip Revenue - Total Fuel Cost - Total Maintenance Cost**
+
+The analysis includes:
+
+- Total completed trip revenue
+- Total fuel cost
+- Total maintenance cost
+- Net profit
+- Profitability rank
+
+A CTE-based SQL query was used to calculate the separate revenue, fuel, and maintenance aggregates, then combined them with the vehicle master table.
+
+## Key Findings
+
+The profitability analysis produced several important findings:
+
+- KDE169I was the only vehicle in the final results with a positive net profit, generating a net profit of 3,633.
+- KDB869I recorded the lowest net profit at -128,452.
+- KDB869I generated 0 completed trip revenue while recording 11,648 in fuel costs and 116,884 in maintenance costs.
+- KDA496F recorded a net profit of -111,990, with 30,608 in revenue, 47,866 in fuel costs, and 94,732 in maintenance costs.
+- KDE501G recorded a net profit of -97,168, with 13,231 in revenue, 32,942 in fuel costs, and 77,457 in maintenance costs.
+- Overall, the results show that high operating and maintenance costs had a significant effect on vehicle profitability.
+
+## Business Recommendations
+
+Based on the vehicle profitability analysis, the following sections are recommended:
+
+1. **Review high-cost vehicles**
+
+   Vehicles with substantial negative net profit should be investigated to understand whether    high maintenance costs, fuel consumption, or low trip utilization are contributing to the     losses.
+
+2. **Investigate maintenance patterns**
+
+   Management should review vehicles with unusually high maintenance expenditure and             maintenance frequency, service types, and associated costs.
+
+3. **Monitor vehicle utilization**
+
+   Vehicles generating little or no completed trip revenue while continuing to incur             operating costs should be reviewed for utilization and operational efficiency.
+
+4. **Monitor fuel efficiency**
+
+   Fuel expenditure should be compared across vehicles to identify vehicles with anomalously high fuel costs.
+
+5. **Use profitability as an ongoing KPI**
+
+   Vehicle-level revenue, fuel cost, maintenance cost, and net profit should be monitored regularly to support fleet management decisions.
+
+## Tools & Technologies
+
+- **PostgreSQL** - Database creation, data cleaning, transformation, relational modelling, and SQL analysis.
+- **DBeaver** - PostgreSQL database management and SQL development.
+- **SQL** - Data extraction, transformation, aggregation, joins, subqueries, CTEs, and window functions.
+- **GitHub** - Project documentation and portfolio presentation
+
+## SQL Skills Demonstrated
+
+This project provided practical experience with:
+
+- 'SELECT', 'WHERE', 'ORDER BY', and 'LIMIT'
+- 'INNER JOIN' and 'LEFT JOIN'
+- Cross-schema joins
+- 'GROUP BY' and aggregate functions
+- 'COUNT()' and 'SUM()'
+- 'AVG()' and subqueries
+- 'CASE' expressions
+- 'COALESCE()'
+- Common Table Expression (CTEs)
+- 'HAVING'
+- Window functions such as 'RANK()'
+- Data validation and type conversion
+- Data cleaning using string and regular-expression functions
+- Primary and foreign key relationships
+
+
+
+
 
 
 

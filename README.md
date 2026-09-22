@@ -316,12 +316,59 @@ This project provided practical experience with:
 - 'AVG()' and subqueries
 - 'CASE' expressions
 - 'COALESCE()'
-- Common Table Expression (CTEs)
+- Common Table Expressions (CTEs)
 - 'HAVING'
 - Window functions such as 'RANK()'
 - Data validation and type conversion
 - Data cleaning using string and regular-expression functions
 - Primary and foreign key relationships
+
+## Project Outcome
+
+The project transformed two raw operational datasets into a structured PostgreSQL database containing booking and fleet information.
+
+The analysis connected trip revenue with vehicle fuel and maintenance costs, allowing vehicle-level profitability to be evaluated.
+
+The final results demonstrated how SQL can be used to move from raw, inconsistent operational data to business insights that can support fleet management and operational decision-making.
+
+## Conclusion
+
+The Haraka Rides project demonstrates an end-to-end data analytics workflow, beginning with raw data profiling and cleaning and ending with SQL- based business analysis.
+
+The project strengthened my practical skills in PostgreSQL, data cleaning, relational database design, SQL querying, cross-schema analysis, and business-focused data
+interpretation.
+
+Most importantly, the project demonstrates how operational data can be converted into structured information and actionable business insights.
+
+## Project Structure 
+
+```text
+haraka-rides-data-analysis/
+│
+├── README.md
+│
+├── images/
+│   └── haraka_rides_database_schema.png
+│
+└── sql/
+    ├── 01_staging.sql
+    ├── 02_cleaning.sql
+    ├── 03_schema.sql
+    ├── 04_loading.sql
+    └── 05_analysis.sql
+```
+
+## SQL Script
+
+The complete SQL workflow is available in the ['sql'](./sql) directory.
+
+The scripts are organized in the order in which the project was completed:
+
+1. ['01_staging.sql'](./sql/01_staging.sql) - Create and load staging tables
+2. ['02_cleaning.sql'](./sql/02_cleaning.sql) - Data cleaning and transformation
+3. ['03_schema.sql'](./sql/03_schema.sql) - Database schemas and table structures
+4. ['04_loading.sql'](./sql/04_loading.sql) - Load cleaned data into final tables
+5. ['05_analysis.sql'](./sql/05_analysis.sql) - Business analysis and profitability
 
 
 
